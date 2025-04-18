@@ -24,9 +24,13 @@ gem "thruster", require: false
 
 group :development, :test do
   gem "rspec-rails", "~> 7.0.0"
+  gem "factory_bot_rails"
+  gem "faker"
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
   gem "brakeman", require: false
   gem "rubocop-rails-omakase", require: false
+  gem "pry-byebug", "~> 3.9"
+  gem "shoulda-matchers", "~> 6.0"
 end
 
 group :development do
