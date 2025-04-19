@@ -10,24 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_17_144905) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_18_191412) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
   create_table "menu_items", force: :cascade do |t|
     t.string "name"
     t.decimal "price"
-    t.bigint "menu_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["menu_id"], name: "index_menu_items_on_menu_id"
+    t.bigint "restaurant_id"
+    t.index ["restaurant_id"], name: "index_menu_items_on_restaurant_id"
+  end
+
+  create_table "menu_items_menus", id: false, force: :cascade do |t|
+    t.bigint "menu_id", null: false
+    t.bigint "menu_item_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["menu_id", "menu_item_id"], name: "index_menu_items_menus_on_menu_id_and_menu_item_id", unique: true
   end
 
   create_table "menus", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "restaurant_id"
+    t.index ["restaurant_id"], name: "index_menus_on_restaurant_id"
   end
 
-  add_foreign_key "menu_items", "menus"
+  create_table "restaurants", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "menu_items", "restaurants"
+  add_foreign_key "menus", "restaurants"
 end
