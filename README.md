@@ -1,24 +1,72 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Restaurant Menu API
 
-Things you may want to cover:
+  
+A scalable RESTful API for restaurant menu management built with Ruby on Rails, following iterative development principles.
 
-* Ruby version
 
-* System dependencies
+## Features
 
-* Configuration
 
-* Database creation
+### Core Functionality
 
-* Database initialization
+-  **Restaurant CRUD** with nested menus
 
-* How to run the test suite
+-  **Multi-level relationships** (Restaurant → Menu → MenuItem)
 
-* Services (job queues, cache servers, search engines, etc.)
+-  **JSON data importer** with transaction safety
 
-* Deployment instructions
+-  **RSpec test coverage** (models, requests, services)
 
-* ...
+  
+
+## Technical Stack
+
+-  **Framework:** Rails 8.0.1
+
+-  **Database:** PostgreSQL
+
+-  **Testing:** RSpec + FactoryBot
+
+  
+
+## Installation
+
+```bash
+git  clone  git@github.com:matheus-oliveira-vieira/restaurant-menu.git
+
+cd  restaurant-menu
+
+bundle  install
+
+rails  db:setup
+```
+## Endpoints
+
+-  **GET /api/v1/import** Import data from JSON
+
+- **GET /api/v1/restaurants/:restaurant_id/menus** Loads all restaurant menus with their items
+
+-  **GET /api/v1/restaurants/:restaurant_id/menus/:id** Loads a specific restaurant menus with their items
+
+-  **GET /api/v1/restaurants** Loads all restaurants
+
+-  **GET /api/v1/restaurants/:id** Loads a specific restaurant
+
+## Test
+Run the command below to execute all tests
+
+```bash
+rspec
+```
+
+## Serialize JSON
+Run the command below to serialize JSON file
+
+```bash
+rails import:json
+```
+
+## License
+
+MIT. Use and adapt freely!

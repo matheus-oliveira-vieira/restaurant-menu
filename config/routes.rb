@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+       post "/import", to: "imports#create"
       resources :restaurants, only: [ :index, :show ] do
         resources :menus, only: [ :index, :show ]
       end
