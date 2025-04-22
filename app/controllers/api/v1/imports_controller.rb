@@ -1,7 +1,7 @@
 class Api::V1::ImportsController < ApplicationController
   def create
     json_data = JSON.parse(request.body.read)
-    logs = JsonImporter.call(json_data)
+    logs = JsonImporter.call(json_data) # calls JsonImporter service
     render json: { success: true, logs: logs }, status: :ok
 
   rescue JSON::ParserError => e
