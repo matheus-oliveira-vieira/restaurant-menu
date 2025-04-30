@@ -12,16 +12,16 @@ const RestaurantDetail = ({ restaurantId, onBack }) => {
 
   return (
     <div>
-      <button onClick={onBack}>← Voltar</button>
-      <h2 className="text-xl font-bold">{restaurant.name}</h2>
+      <button onClick={onBack} className="text-indigo-600 hover:underline mb-4">Voltar</button>
+      <h2 className="text-3xl font-bold text-gray-800 mb-6">{restaurant.name}</h2>
 
       {restaurant.menus.map((menu) => (
-        <div key={menu.id} className="border p-2 my-2">
-          <h3 className="font-semibold">{menu.name}</h3>
-          <ul className="list-disc ml-4">
+        <div key={menu.id} className="mb-6 border rounded-lg shadow-sm p-4 bg-gray-50">
+          <h3 className="text-xl font-semibold text-gray-700 mb-2">{menu.name}</h3>
+          <ul className="list-disc list-inside space-y-1">
             {menu.menu_items.map((item) => (
-              <li key={item.id}>
-                {item.name} - R$ {(item.price / 100).toFixed(2)}
+              <li key={item.id} className="text-gray-600">
+                {item.name} - <span className="font-medium text-gray-800">$ {Number(item.price).toFixed(2)}</span>
               </li>
             ))}
           </ul>
