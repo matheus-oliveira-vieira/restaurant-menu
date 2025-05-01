@@ -12,7 +12,30 @@ class Api::V1::MenusController < ApplicationController
     render json: @menu, include: :menu_items, status: :ok
   end
 
+  def create
+    restaurant = Restaurant.find(params[:restaurant_id])
+    menu = restaurant.menus.new(menu_params)
+    if menu.save
+      render json: menu, status: :created
+    else
+      render json: { errors: menu.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    menu = Menu.find(params[:id])
+    if menu.update(menu_params)
+      render json: menu, status: :ok
+    else
+      render json: { errors: menu.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
   private
+
+  def menu_params
+    params.require(:menu).permit(:name, menu_item_ids: [])
+  end
 
   def not_found(e)
     render json: {
