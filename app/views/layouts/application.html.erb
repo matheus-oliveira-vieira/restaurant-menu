@@ -18,10 +18,7 @@
     <link rel="apple-touch-icon" href="/icon.png">
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%# stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%# stylesheet_link_tag 'builds/application', media: 'all' %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload', href: asset_path('application.css') %>
-    <%# javascript_importmap_tags %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
 
   </head>
