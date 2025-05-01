@@ -22,7 +22,7 @@ gem "kamal", require: false
 gem "thruster", require: false
 
 group :development, :test do
-  gem "rspec-rails", "~> 7.0.0"
+  gem "rspec-rails", "~> 8.0.0"
   gem "factory_bot_rails"
   gem "faker"
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
