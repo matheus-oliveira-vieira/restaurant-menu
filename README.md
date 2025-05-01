@@ -67,6 +67,19 @@ Run the command below to serialize JSON file
 rails import:json
 ```
 
+## How to run the Application
+In a terminal, run the following command to run the application.
+
+```bash
+bin/dev
+```
+
+In another terminal, run the command to upload the CSS changes
+
+```bash
+yarn build:css
+```
+
 ## License
 
 MIT. Use and adapt freely!

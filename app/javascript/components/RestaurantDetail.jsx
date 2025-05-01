@@ -13,7 +13,7 @@ const RestaurantDetail = ({ restaurantId, onBack }) => {
   const handleMenuCreated = (newMenu) => {
     setRestaurant((prev) => ({
       ...prev,
-      menus: [...prev.menus, newMenu],
+      menus: [...prev.menus, { ...newMenu, menu_items: [] }],
     }));
   };
 

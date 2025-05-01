@@ -13,12 +13,14 @@ const MenuItemForm = ({ restaurantId, menuId, onCreated }) => {
     setError(null);
 
     try {
-      const newItem = await createMenuItem({
-        name,
-        price: parseFloat(price),
-        restaurant_id: restaurantId,
-        menu_ids: [menuId],
-      });
+      const newItem = await createMenuItem(
+        restaurantId,
+        menuId,
+        {
+          name,
+          price: parseFloat(price),
+        }
+      );
 
       setName("");
       setPrice("");

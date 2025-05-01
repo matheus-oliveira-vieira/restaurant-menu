@@ -22,15 +22,6 @@ class Api::V1::MenusController < ApplicationController
     end
   end
 
-  def update
-    menu = Menu.find(params[:id])
-    if menu.update(menu_params)
-      render json: menu, status: :ok
-    else
-      render json: { errors: menu.errors.full_messages }, status: :unprocessable_entity
-    end
-  end
-
   private
 
   def menu_params

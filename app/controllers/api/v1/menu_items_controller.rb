@@ -7,18 +7,12 @@ class Api::V1::MenuItemsController < ApplicationController
   end
 
   def create
-    item = MenuItem.new(menu_item_params)
+    restaurant = Restaurant.find(params[:restaurant_id])
+    menu = restaurant.menus.find(params[:menu_id])
+    item = restaurant.menu_items.new(menu_item_params)
     if item.save
+      item.menus << menu unless item.menus.include?(menu)
       render json: item, status: :created
-    else
-      render json: { errors: item.errors.full_messages }, status: :unprocessable_entity
-    end
-  end
-
-  def update
-    item = MenuItem.find(params[:id])
-    if item.update(menu_item_params)
-      render json: item, status: :ok
     else
       render json: { errors: item.errors.full_messages }, status: :unprocessable_entity
     end
@@ -27,7 +21,7 @@ class Api::V1::MenuItemsController < ApplicationController
   private
 
   def menu_item_params
-    params.require(:menu_item).permit(:name, :price, :restaurant_id)
+    params.require(:menu_item).permit(:name, :price)
   end
 
   def not_found(e)

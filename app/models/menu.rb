@@ -8,6 +8,8 @@ class Menu < ApplicationRecord
   private
 
   def menu_items_belong_to_same_restaurant
+    return if menu_items.empty?
+
     menu_items.each do |item|
       unless item.restaurant_id == restaurant_id
         errors.add(:menu_items, "must belong to the same restaurant")

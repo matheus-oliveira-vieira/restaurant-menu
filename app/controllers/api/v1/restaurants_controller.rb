@@ -21,15 +21,6 @@ class Api::V1:: RestaurantsController < ApplicationController
     end
   end
 
-  def update
-    restaurant = Restaurant.find(params[:id])
-    if restaurant.update(restaurant_params)
-      render json: restaurant, status: :ok
-    else
-      render json: { errors: restaurant.errors.full_messages }, status: :unprocessable_entity
-    end
-  end
-
   private
 
   def restaurant_params

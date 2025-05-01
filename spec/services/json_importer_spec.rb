@@ -48,4 +48,38 @@ describe 'JsonImporter' do
     expect(logs.any? { |log| log.include?("Menu: lunch") }).to be true
     expect(logs.any? { |log| log.include?("Added item: Burger") }).to be true
   end
+
+  it "skips duplicate menu items when they already exist in the menu" do
+    restaurant = Restaurant.create!(name: "Poppo's Cafe")
+    menu = restaurant.menus.create!(name: "lunch")
+    existing_item = MenuItem.create!(
+      name: "Burger",
+      price: 9.00,
+      restaurant: restaurant
+    )
+    menu.menu_items << existing_item  # Item already exists menu
+
+    # JSON data with duplicate item
+    duplicate_json = {
+      "restaurants" => [
+        {
+          "name" => "Poppo's Cafe",
+          "menus" => [
+            {
+              "name" => "lunch",
+              "menu_items" => [
+                { "name" => "Burger", "price" => 9.00 }  # Item duplicado
+              ]
+            }
+          ]
+        }
+      ]
+    }
+
+    logs = JsonImporter.call(duplicate_json)
+
+    # Check that the item has not been added again
+    expect(menu.reload.menu_items.count).to eq(1)
+    expect(logs.any? { |log| log.include?("Skipped duplicate item: Burger") }).to be true
+  end
 end
